@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investor Outreach Infrastructure — Cameron Germishuys</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #1e1e1e;
+      --text: #f0f0f0;
+      --muted: #888888;
+      --light: #cccccc;
+      --gold: #b8975a;
+      --gold-dim: rgba(184, 151, 90, 0.12);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section { padding: 80px 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    /* ── Nav ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-name {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-contact {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav-contact:hover { color: var(--gold); }
+
+    /* ── Hero ── */
+    .hero { padding: 96px 0 80px; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--light);
+      max-width: 580px;
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    /* ── Section headings ── */
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 36px;
+      color: var(--text);
+    }
+
+    /* ── What It Is ── */
+    .what-body {
+      font-size: 1.05rem;
+      color: var(--light);
+      line-height: 1.85;
+      max-width: 720px;
+    }
+
+    /* ── Deliverables ── */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .deliverable-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .check {
+      color: var(--gold);
+      font-size: 0.9rem;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .deliverable-item span {
+      font-size: 0.9rem;
+      color: var(--light);
+      line-height: 1.5;
+    }
+
+    /* ── Pricing ── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .plan {
+      padding: 32px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan.featured {
+      border-color: var(--gold);
+      background: var(--gold-dim);
+    }
+
+    .plan-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .plan.featured .plan-label { color: var(--gold); }
+
+    .plan-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .plan-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .plan-features li {
+      font-size: 0.85rem;
+      color: var(--light);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+
+    .plan-features li::before {
+      content: "—";
+      color: var(--gold);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 1px;
+    }
+
+    .plan-timeline {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── CTA ── */
+    .cta-section { padding: 80px 0; text-align: center; }
+
+    .cta-section h2 {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: #0a0a0a;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .btn:hover { opacity: 0.9; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+    }
+
+    footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── Mobile ── */
+    @media (max-width: 640px) {
+      section { padding: 60px 0; }
+      .hero { padding: 64px 0 60px; }
+
+      .deliverables-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer .container {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+
+      nav .container {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <span class="nav-name">Cameron Germishuys</span>
+      <a href="mailto:germcaml@gmail.com" class="nav-contact">germcaml@gmail.com</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="eyebrow">Investor Outreach Infrastructure</span>
+      <h1>Done-for-you lead generation,<br />email sequences &amp; CRM automation.</h1>
+      <p class="hero-sub">
+        Built specifically for boutique real estate and private equity firms that need to generate
+        pipeline without adding headcount — delivered and ready to operate within two weeks.
+      </p>
+      <a href="https://calendly.com/placeholder" class="btn">Book a 20-Minute Call</a>
+    </div>
+  </section>
+
+  <!-- What It Is -->
+  <section>
+    <div class="container">
+      <h2>What This Is</h2>
+      <p class="what-body">
+        A done-for-you investor outreach system built for firms that run lean. I deliver targeted lead
+        lists, multi-step email sequences, and CRM infrastructure so your team can run institutional-quality
+        outreach from day one — no internal ops hire required, no ramp-up time. Every engagement is scoped,
+        delivered, and operational within two weeks.
+      </p>
+    </div>
+  </section>
+
+  <!-- Deliverables -->
+  <section>
+    <div class="container">
+      <h2>What's Delivered</h2>
+      <div class="deliverables-grid">
+        <div class="deliverable-item">
+          <span class="check">&#10003;</span>
+          <span>Verified contact lists — partners, MDs, and IR leads</span>
+        </div>
+        <div class="deliverable-item">
+          <span class="check">&#10003;</span>
+          <span>LinkedIn + email enrichment with firm-level context</span>
+        </div>
+        <div class="deliverable-item">
+          <span class="check">&#10003;</span>
+          <span>Custom multi-step email sequences (3 or 5-step)</span>
+        </div>
+        <div class="deliverable-item">
+          <span class="check">&#10003;</span>
+          <span>Personalization layer tied to firm strategy and recent deals</span>
+        </div>
+        <div class="deliverable-item">
+          <span class="check">&#10003;</span>
+          <span>Airtable CRM tracker with status, reply tracking, and pipeline view</span>
+        </div>
+        <div class="deliverable-item">
+          <span class="check">&#10003;</span>
+          <span>Make.com automation — auto-logging and follow-up triggers (Full Build)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section>
+    <div class="container">
+      <h2>Pricing</h2>
+      <div class="pricing-grid">
+
+        <div class="plan">
+          <div class="plan-label">Starter</div>
+          <div class="plan-price">$1,500</div>
+          <ul class="plan-features">
+            <li>250 verified contacts</li>
+            <li>Decision-maker targeting</li>
+            <li>3-step email sequence</li>
+          </ul>
+          <div class="plan-timeline">Delivered in 5–7 days</div>
+        </div>
+
+        <div class="plan featured">
+          <div class="plan-label">Standard</div>
+          <div class="plan-price">$2,500</div>
+          <ul class="plan-features">
+            <li>500 verified contacts</li>
+            <li>LinkedIn + email enrichment</li>
+            <li>5-step email sequence</li>
+            <li>Airtable CRM tracker</li>
+          </ul>
+          <div class="plan-timeline">Delivered in 7–10 days</div>
+        </div>
+
+        <div class="plan">
+          <div class="plan-label">Full Build</div>
+          <div class="plan-price">$3,500</div>
+          <ul class="plan-features">
+            <li>Everything in Standard</li>
+            <li>Make.com automation</li>
+            <li>Personalization layer</li>
+            <li>30-day retainer support</li>
+            <li>Sequence optimization included</li>
+          </ul>
+          <div class="plan-timeline">Delivered in 10–14 days</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to build your pipeline?</h2>
+      <p class="cta-sub">Book a 20-minute call — I'll walk you through exactly what I'd build for your firm.</p>
+      <a href="https://calendly.com/placeholder" class="btn">Schedule a Call</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <span class="footer-name">Cameron Germishuys &mdash; Penn State University, Finance &amp; Real Estate</span>
+      <div class="footer-links">
+        <a href="mailto:germcaml@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/cameron" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
